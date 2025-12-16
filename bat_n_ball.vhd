@@ -61,15 +61,15 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
         (CONV_STD_LOGIC_VECTOR(525, 11),CONV_STD_LOGIC_VECTOR(525, 11),CONV_STD_LOGIC_VECTOR(525, 11),CONV_STD_LOGIC_VECTOR(525, 11))); -- grid y array
     shared variable bOn : boxesOn := ((others => (others => '0'))); -- initialize all to '0'; -- how the game knows whether/where it can draw a box
     
-    shared variable boxvalues : boxesValue := ((2,0,0,0), (0,0,0,0), (0,0,0,0), (0,0,0,0)); -- how the game knows what value each box is
+    --shared variable boxvalues : boxesValue := ((2,0,0,0), (0,0,0,0), (0,0,0,0), (0,0,0,0)); -- how the game knows what value each box is
     
     
 
 BEGIN
     -- White background, red grid lines, green boxes
-    red <= S_red;  -- Red ON everywhere except boxes (grid + background = red)
-    green <= S_green;  -- Green ON everywhere except grid (boxes + background = green)
-    blue <= S_blue;  -- Blue ON only on background
+    red <= S_red;  
+    green <= S_green;  
+    blue <= S_blue;  
     -- process to draw board grid (using bat code)
     batdraw : PROCESS (pixel_row, pixel_col) IS
         VARIABLE vx, vy : STD_LOGIC_VECTOR (10 DOWNTO 0); -- 9 downto 0
@@ -132,65 +132,65 @@ BEGIN
         -- 3. Assign Color Based on Priority (Grid > Boxes > Background)
     
         IF bat_on = '1' THEN
-            -- GRID LINES (Red)
-            S_red   <= "1111";
-            S_green <= "0000";
-            S_blue  <= "0000";
+            -- GRID LINES (Black)
+            S_red   <= "0001";
+            S_green <= "0001";
+            S_blue  <= "0001";
             
         ELSIF is_box_on THEN
             -- BOXES - Assign color based on the value
             CASE current_box_value IS
-                WHEN 2 => -- Dark Yellow
+                WHEN 2 => -- Red
+                    S_red   <= "1111";
+                    S_green <= "0000";
+                    S_blue  <= "0000";
+                WHEN 4 => -- Orange
+                    S_red   <= "1111";
+                    S_green <= "0111";
+                    S_blue  <= "0000";
+                WHEN 8 => -- Yellow
                     S_red   <= "1111";
                     S_green <= "1111";
                     S_blue  <= "0000";
-                WHEN 4 => -- Cyan
-                    S_red   <= "0000";
-                    S_green <= "1111";
-                    S_blue  <= "1111";
-                WHEN 8 => -- Purple
-                    S_red   <= "1010";
-                    S_green <= "0000";
-                    S_blue  <= "1010";
                 WHEN 16 => -- Light Green
                     S_red   <= "0000";
                     S_green <= "1111";
                     S_blue  <= "0000";
-                WHEN 32 => -- Orange
-                    S_red   <= "1111";
+                WHEN 32 => -- Cyan 
+                    S_red   <= "0000";
+                    S_green <= "1111";
+                    S_blue  <= "1110";
+                WHEN 64 => -- Blue
+                    S_red   <= "0000";
                     S_green <= "0111";
-                    S_blue  <= "0000";
-                WHEN 64 => -- Hot Pink
+                    S_blue  <= "1111";
+                WHEN 128 => -- Purple
+                    S_red   <= "1010";
+                    S_green <= "0000";
+                    S_blue  <= "1010";
+                WHEN 256 => -- Grape 
+                    S_red   <= "0110";
+                    S_green <= "0000";
+                    S_blue  <= "0011";
+                WHEN 512 => -- Hot Pink 
                     S_red   <= "1111";
                     S_green <= "0000";
                     S_blue  <= "0111";
-                WHEN 128 => -- Indigo
-                    S_red   <= "0111";
-                    S_green <= "0000";
-                    S_blue  <= "1111";
-                WHEN 256 => -- Maroon
+                WHEN 1024 => -- Blue Grey 
                     S_red   <= "0011";
-                    S_green <= "0000";
-                    S_blue  <= "0000";
-                WHEN 512 => -- Magenta
-                    S_red   <= "0111";
-                    S_green <= "0000";
-                    S_blue  <= "0011";
-                WHEN 1024 => -- More Purple Purple
-                    S_red   <= "0110";
-                    S_green <= "0000";
-                    S_blue  <= "1001";
-                WHEN OTHERS => -- Default (White)
-                    S_red   <= "1111";
-                    S_green <= "1111";
-                    S_blue  <= "1111";
+                    S_green <= "0110";
+                    S_blue  <= "0111";
+                WHEN OTHERS => -- Pale Yellow
+                    S_red   <= "1100";
+                    S_green <= "1110";
+                    S_blue  <= "0010";
             END CASE;
         
         ELSE
             -- BACKGROUND (Light Gray)
-            S_red   <= "0100";
-            S_green <= "0100";
-            S_blue  <= "0100";
+            S_red   <= "1110";
+            S_green <= "1110";
+            S_blue  <= "1110";
         END IF;
     
     END PROCESS color_generator;
@@ -518,4 +518,3 @@ BEGIN
         END IF;
     END PROCESS;
 END Behavioral;
-
