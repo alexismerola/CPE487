@@ -19,11 +19,6 @@ All the game state updates occur synchronously on the VGA vertical sync signal, 
 
 Pressing the reset button (BTNC) clears the board and starts a new game. The player wins by creating a 2048 tiles and loses if the board fills with no valid moves remaining.
 
-Nexys A7 FPGA Board
-![alt text](http://url/to/img.png)
-
-INSERT IMAGE OF Monitor
-
 <br />
 
 **Project in Vivado and Nexys Board:**
