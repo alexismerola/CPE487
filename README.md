@@ -23,7 +23,7 @@ Pressing the reset button (BTNC) clears the board and starts a new game. The pla
 
 **Project in Vivado and Nexys Board:**
 
-To run te project in Vivado and on the Nexys board, the following steps are required:
+To run the project in Vivado and on the Nexys board, the following steps are required:
 1. Create a new Vivado project called 2048 targeting the Nexys A7 - 100T FPGA
 2. Add all VHDL source files, including pong.vhd, bat_n_ball.vhd, clk_wiz_0.vhd, clk_wiz_0_clk_wiz.vhd, leddec16.vhd, vga_sync.vhd.
 3. Add pong.xdc constraints file to the project.
@@ -84,10 +84,12 @@ These changes transformed a simple Pong display into a complete grid-based game 
 
 - Conclude with a summary of the process itself – who was responsible for what components (preferably also shown by each person contributing to the github repository!), the timeline of work completed, any difficulties encountered and how they were solved, etc. (10 points of the Submission category)
 
-This project was completed as a team effort. Resoonisibilites were dirvides up between differnet pieces of the game. Both of us worked on creating the array and setting up the game board. Alexis implemented the movement logic and spawning of new tiles. Jordan added the colors to each different box value 2 through 2048. 
+This project was completed as a team effort. Resoonisibilites were dirvided up between differnet pieces of the game. Both of us worked on creating the array and setting up the game board. Alexis implemented the movement logic and spawning of new tiles. Jordan added the colors to each different box value 2 through 2048. 
+
+In order to implement our design we first began brainstorming how to create this project. We decided to use the Lab 6 pong game as our base code. We were able to turn the bat from the pong game into our game board by stopping it from moving, extending it across the entire screen, and dupublicating it in both horizontal and vertical directions using constants until 16 boxes were shown on the screen. This is done in the batdraw process.
+
+
 
 Major challenges included implementing correct merge behavior and preventing unintended repeated movements from button presses. These issues were resolved by adding merge flags and a move counter synchronized with the frame update.
-
-Overall, the project demonstrates both collaborative development and a strong understanding of synchronous digital design using VHDL.
 
 <br />
