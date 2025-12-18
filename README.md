@@ -60,7 +60,7 @@ Outputs (to Nexys board)
 
 ![Full Board](2048-game-pic.png)
 
-[Video](2048.mp4)
+[![2048 Demo](demo_thumbnail.png)](https://youtube.com/shorts/pknm0mbw3cA?feature=share)
 
 <br />
 
