@@ -5,9 +5,7 @@
 
 **Expected Behavior:**
 
-The project implements the game 2048 entirely in hardware on the Nexys A7 FPGA and outputs the game visually through a VGA monitor.
-
-When powered on, the system displays a 4x4 grid representing the 2048 game board. Once the game begins (by pressing BTNC) a tile with a value of 2 will appear on the board. The player interacts with the game using the on-board push buttons. Pressing BTNU for up, BTND for down, BTNL for left, or BTNR for right will cause all the tiles to slide in the corresponding direction.
+The project implements the game 2048 entirely in hardware on the Nexys A7 FPGA and outputs the game visually through a VGA monitor. When powered on, the system displays a 4x4 grid representing the 2048 game board. Once the game begins (by pressing BTNC) a tile with a value of 2 will appear on the board. The player interacts with the game using the on-board push buttons. Pressing BTNU for up, BTND for down, BTNL for left, or BTNR for right will cause all the tiles to slide in the corresponding direction.
 
 Tile movement follows the standard 2048 rules:
 - Tiles slide as far as possible in the selected direction.
@@ -40,8 +38,6 @@ Once programed, the game runs automatically and responds to user input through t
 
 **Inputs and Outputs:**
 
-- Description of inputs from and outputs to the Nexys board from the Vivado project (10 points of the Submission category)
-- As part of this category, if using starter code of some kind (discussed below), you should add at least one input and at least one output appropriate to your project to demonstrate your understanding of modifying the ports of your various architectures and components in VHDL as well as the separate .xdc constraints file.
 We used Lab 6, the pong game as starter code.
 Inputs (from Nexys board)
 - System clock (100 MHz)
@@ -62,14 +58,12 @@ Outputs (to Nexys board)
 
 **Project in Action:**  
 
-- Images and/or videos of the project in action interspersed throughout to provide context (10 points of the Submission category)
-When running on hardware, the VGA monitor displays the 2048 grid with colored tiles representing different values. Pressing a direction button causes the tiles to slide and merge smoothly on the next screen refresh. Resetting the board visibly clears all tiles and spawns a new starting tile.
-
-IMAGES AND VIDEOS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+![Full Board](2048-game-pic.png)
 
 <br />
 
 **Modifications:**
+
 This project was built on top of the Pong Lab (Lab 6) starter code. Major modifications include:
 - Replacing ball and paddle logic with a 4×4 tile grid structure
 - Adding full 2048 movement and merge logic in hardware
@@ -84,15 +78,11 @@ These changes transformed a simple Pong display into a complete grid-based game 
 
 **Process:**
 
-- Conclude with a summary of the process itself – who was responsible for what components (preferably also shown by each person contributing to the github repository!), the timeline of work completed, any difficulties encountered and how they were solved, etc. (10 points of the Submission category)
-
 This project was completed as a team effort. Resoonisibilites were divided up between different pieces of the game. Both team members collaborated on creating the tile array and setting up the game board structure. Alexis implemented the movement logic, merge behavior, and tile spawning. Jordan implemented the color mapping for each tile value 2 through 2048. 
 
 Design Evolution:
 
-The project bagan with brainstorming how to adapt the Lab 6 Pong code into a grid-based game. Initially, the Pong bat was repurposed to form the game board by stopping its movement, extending it across the screen, and duplicating it horizontally and vertically using constants until a 4x4 grid (16 boxes) was displayed. This logic was implemented in the batdraw process.
-
-Early attempts at gameplay involved treating a tile as a moving square object. This approach led to issues with speed control, screen boundaries, and overall complexity. As a result, the design shifted to a grid-based array approach, which better matched the rules of 2048.
+The project bagan with brainstorming how to adapt the Lab 6 Pong code into a grid-based game. Initially, the Pong bat was repurposed to form the game board by stopping its movement, extending it across the screen, and duplicating it horizontally and vertically using constants until a 4x4 grid (16 boxes) was displayed. This logic was implemented in the batdraw process. Early attempts at gameplay involved treating a tile as a moving square object. This approach led to issues with speed control, screen boundaries, and overall complexity. As a result, the design shifted to a grid-based array approach, which better matched the rules of 2048.
 
 Array-Based Game Logic:
 
@@ -103,16 +93,15 @@ Movement is implemented using nested loops that traverse the array in a directio
 - Adjacent tiles with equal values are merged by doubling one value and clearing the other
 - A separate merge flag array ensures that each tile can merge only once per move
 
-Tiles are prevented from merging with tiles of different values by explicitly checking equality before any merge operation occurs. If no movement or merge occurs during a button press, no new tile is spawned.
-
-Once a valid move is detected, a new tile with value 2 is spawned in an empty array location. All of these updates occur synchronously on the vertical sync signal.
+Tiles are prevented from merging with tiles of different values by explicitly checking equality before any merge operation occurs. If no movement or merge occurs during a button press, no new tile is spawned. Once a valid move is detected, a new tile with value 2 is spawned in an empty array location. All of these updates occur synchronously on the vertical sync signal.
 
 Value-Based Color Mapping:
 
 To improve usability and visual feedback, the game implements value-based tile coloring using the VGA RGB outputs. Each tile's numberical value stored in the 4x4 array is mapped to a specific color during the VGA rednering process.
 
 The colors given to each tile are:
-INSERT IMAGE OF TILE COLORS
+
+![Tile Colors](colors-2048.png)
 
 The color logic is implemented using conditional checks on each tile's stored value. Based on this value, the VGA red, green,  and blue signals are assigned appropriate intensity levels. Because this logic is driven directly from thegame-state array, tile colors update automatically whenever merges occur.
 
