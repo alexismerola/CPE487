@@ -58,7 +58,11 @@ Outputs (to Nexys board)
 
 **Project in Action:**  
 
+2048 Board Image:
+
 ![Full Board](2048-game-pic.png)
+
+2048 Game Demo (Click on the Image Below):
 
 [![2048 Demo](2048-demo-pic.png)](https://youtube.com/shorts/pknm0mbw3cA?feature=share)
 
