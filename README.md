@@ -60,6 +60,8 @@ Outputs (to Nexys board)
 
 ![Full Board](2048-game-pic.png)
 
+[Video](2048.mp4)
+
 <br />
 
 **Modifications:**
