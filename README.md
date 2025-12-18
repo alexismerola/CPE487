@@ -87,6 +87,9 @@ These changes transformed a simple Pong display into a complete grid-based game 
 This project was completed as a team effort. Resoonisibilites were dirvided up between differnet pieces of the game. Both of us worked on creating the array and setting up the game board. Alexis implemented the movement logic and spawning of new tiles. Jordan added the colors to each different box value 2 through 2048. 
 
 In order to implement our design we first began brainstorming how to create this project. We decided to use the Lab 6 pong game as our base code. We were able to turn the bat from the pong game into our game board by stopping it from moving, extending it across the entire screen, and dupublicating it in both horizontal and vertical directions using constants until 16 boxes were shown on the screen. This is done in the batdraw process.
+After our gameboard was created we wanted to add in one box to start. We attempted to do this by adding an object in the shape of a square and gave it movement logic so when you pressed the buttons it would move in the direction specified. This came with many issues with speed and the box going off the screen. We soon realized this was not a good way to complete our game.
+Next, we decided to try and implement an array instead this way each box on the gameboard would be its own section in the array. summaraize arrays !!!!!!!!!!!!!!!!!!!!!!!! and how they work
+Now that we created our array we needed to implement boxes and movement logic.
 
 
 
